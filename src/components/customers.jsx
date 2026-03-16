@@ -5,7 +5,7 @@ function Customers() {
   const [customers, setCustomers] = useState([]);
 
   useEffect(() => {
-    axios.get("http://web-production/144cc.up.railway.app")
+    axios.get(`${import.meta.env.VITE_API_URL}/api/users/`)
       .then(res => {
         setCustomers(res.data);
       });
