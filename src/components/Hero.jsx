@@ -14,8 +14,8 @@ export default function Hero() {
           alt="Team collaboration"
           className="w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background/90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/10 to-background/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/10 via-transparent to-background/10" />
       </div>
 
       {/* Animated gradient orbs */}
@@ -30,7 +30,7 @@ export default function Hero() {
             transition={{ duration: 0.6 }}
             className="mb-6"
           >
-            <span className="inline-flex items-center gap-2 bg-accent/10 border border-accent/20 text-accent px-4 py-2 rounded-full text-sm font-medium">
+            <span className="inline-flex items-center gap-2 bg-accent/35 border border-accent/20 text-white px-4 py-2 rounded-full text-sm font-medium">
               <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
               Your Growth Partner
             </span>

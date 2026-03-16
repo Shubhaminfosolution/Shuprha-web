@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-const logo="/logo.png";
+const logo = "/logo.png";
 
 const navLinks = [
   { name: 'Home', href: '#home' },
   { name: 'Services', href: '#services' },
   { name: 'About', href: '#about' },
+  { name: 'Businesses', href: '#businesses' },
   { name: 'Why Us', href: '#testimonials' },
   { name: 'Contact', href: '#contact' },
 ]
@@ -28,22 +29,21 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'glass py-3' : 'bg-transparent py-5'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'glass py-3' : 'bg-transparent py-5'
+        }`}
     >
       <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <div className='logo-container'>
 
-          <img className='logo' src={logo}/>
+          <img className='logo' src={logo} />
         </div>
-       
+
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="text-muted-foreground hover:text-foreground transition-colors duration-200 text-sm font-medium"
+              className="text-white hover:text-foreground transition-colors duration-200 text-sm font-medium"
             >
               {link.name}
             </a>
@@ -51,10 +51,7 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-4">
-          <button className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-            Login
-          </button>
-          <button className="bg-accent hover:bg-accent/90 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 hover:shadow-lg hover:shadow-accent/25">
+          <button href="#contact" className="bg-accent hover:bg-accent/90 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 hover:shadow-lg hover:shadow-accent/25" >
             Get Started
           </button>
         </div>
