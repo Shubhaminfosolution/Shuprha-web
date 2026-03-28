@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import { Twitter, Linkedin, Instagram, Github, ArrowUpRight } from 'lucide-react'
-const logo="/logo.png";
+import { Link } from 'react-router-dom'
+
+const logo = "/logo.png";
 
 const footerLinks = {
   Company: ['About', 'Careers', 'Blog', 'Press'],
@@ -12,7 +14,7 @@ const footerLinks = {
 const socialLinks = [
   { icon: Twitter, href: '#', label: 'Twitter' },
   { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
+  { icon: Instagram, href: 'https://instagram.com/shuprha', label: 'Instagram' },
   { icon: Github, href: '#', label: 'GitHub' },
 ]
 
@@ -20,21 +22,29 @@ export default function Footer() {
   return (
     <footer className="bg-muted border-t border-border">
       <div className="max-w-7xl mx-auto px-6 py-20">
+
         <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-16">
+
+          {/* Logo Section */}
           <div className="col-span-2">
-             <div className='logo-container footer'>
-          <img className='logo' src={logo}/>
-        </div>
+            <div className='logo-container footer'>
+              <img className='logo' src={logo} alt="logo" />
+            </div>
+
             <p className="text-muted-foreground mb-6 max-w-xs leading-relaxed">
               Transforming brands through innovative digital marketing strategies since 2026. Think Digital, Think Shuprha.
             </p>
+
             <div className="flex gap-3">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent transition-colors"
+                  className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center 
+                             text-muted-foreground hover:text-accent hover:border-accent transition-colors"
                 >
                   <social.icon className="w-4 h-4" />
                 </a>
@@ -42,43 +52,40 @@ export default function Footer() {
             </div>
           </div>
 
+          {/* Links Section */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
               <h4 className="font-semibold mb-4">{category}</h4>
               <ul className="space-y-3">
-                {links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ))}
+
+                {links.map((link) => {
+                  const path = "/" + link.toLowerCase().replace(/ /g, '-')
+
+                  return (
+                    <li key={link}>
+                      <Link
+                        to={path}
+                        className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                      >
+                        {link}
+                      </Link>
+                    </li>
+                  )
+                })}
+
               </ul>
             </div>
           ))}
+
         </div>
 
-        <div className="pt-8 border-t border-border">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-muted-foreground text-sm">
-              © 2026 Shuprha. All rights reserved.
-            </p>
-            <div className="flex items-center gap-6">
-              <a href="#" className="text-muted-foreground hover:text-foreground text-sm transition-colors">
-                Privacy Policy
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground text-sm transition-colors">
-                Terms of Service
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground text-sm transition-colors">
-                Cookies
-              </a>
-            </div>
-          </div>
+        {/* Bottom Section (Clean + Centered) */}
+        <div className="pt-8 border-t border-border text-center">
+          <p className="text-muted-foreground text-sm tracking-wide">
+            © 2026 Shuprha. All rights reserved.
+          </p>
         </div>
+
       </div>
 
       {/* Back to top */}
@@ -86,8 +93,7 @@ export default function Footer() {
         href="#home"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center shadow-lg shadow-accent/25 hover:bg-accent/90 transition-colors z-40"
-        aria-label="Back to top"
+        className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center shadow-lg hover:bg-accent/90 transition z-40"
       >
         <ArrowUpRight className="w-5 h-5 -rotate-45" />
       </motion.a>

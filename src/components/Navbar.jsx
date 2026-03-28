@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import { Link } from 'react-router-dom'
+
 const logo = "/logo.png";
 
 const navLinks = [
-  { name: 'Home', href: '#home' },
+  { name: 'Home', path: '/' },
   { name: 'Services', href: '#services' },
   { name: 'About', href: '#about' },
-  { name: 'Businesses', href: '#businesses' },
+  { name: 'Businesses', path: '/businesses' },
   { name: 'Why Us', href: '#testimonials' },
   { name: 'Contact', href: '#contact' },
 ]
@@ -28,68 +30,115 @@ export default function Navbar() {
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'glass py-3' : 'bg-transparent py-5'
-        }`}
+      transition={{ duration: 0.6 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'glass py-3 backdrop-blur-lg bg-black/60 border-b border-white/10'
+          : 'bg-gradient-to-b from-black/60 to-transparent py-5'
+      }`}
     >
       <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <div className='logo-container'>
 
-          <img className='logo' src={logo} />
-        </div>
+        {/* Logo */}
+        <Link to="/" className="logo-container">
+          <img
+            src={logo}
+            alt="logo"
+            className="brightness-110 contrast-125"
+          />
+        </Link>
 
+        {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-white hover:text-foreground transition-colors duration-200 text-sm font-medium"
-            >
-              {link.name}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.path ? (
+              <Link
+                key={link.name}
+                to={link.path}
+                className="text-white text-sm font-medium 
+                           drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]
+                           hover:text-primary hover:scale-105 
+                           transition-all duration-200"
+              >
+                {link.name}
+              </Link>
+            ) : (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-white text-sm font-medium 
+                           drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]
+                           hover:text-primary hover:scale-105 
+                           transition-all duration-200"
+              >
+                {link.name}
+              </a>
+            )
+          )}
         </div>
 
+        {/* CTA */}
         <div className="hidden md:flex items-center gap-4">
-          <button href="#contact" className="bg-accent hover:bg-accent/90 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 hover:shadow-lg hover:shadow-accent/25" >
+          <a
+            href="#contact"
+            className="bg-gradient-to-r from-blue-500 to-blue-400 text-white px-5 py-2.5 rounded-full text-sm font-medium 
+                       hover:scale-105 hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-200"
+          >
             Get Started
-          </button>
+          </a>
         </div>
 
+        {/* Mobile Toggle */}
         <button
-          className="md:hidden text-foreground"
+          className="md:hidden text-white"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </nav>
 
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass mt-2 mx-4 rounded-2xl overflow-hidden"
+            className="md:hidden glass mt-2 mx-4 rounded-2xl overflow-hidden bg-black/80 backdrop-blur-xl"
           >
             <div className="p-6 flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-muted-foreground hover:text-foreground transition-colors py-2 text-lg"
-                >
-                  {link.name}
-                </a>
-              ))}
-              <div className="flex flex-col gap-3 pt-4 border-t border-border">
-                <button className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2">
+              {navLinks.map((link) =>
+                link.path ? (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-gray-300 hover:text-white text-lg transition"
+                  >
+                    {link.name}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-gray-300 hover:text-white text-lg transition"
+                  >
+                    {link.name}
+                  </a>
+                )
+              )}
+
+              <div className="flex flex-col gap-3 pt-4 border-t border-white/10">
+                <button className="text-sm text-gray-400 hover:text-white">
                   Login
                 </button>
-                <button className="bg-accent hover:bg-accent/90 text-white px-5 py-3 rounded-full text-sm font-medium transition-all">
+                <a
+                  href="#contact"
+                  className="bg-gradient-to-r from-blue-500 to-blue-400 text-white px-5 py-3 rounded-full text-sm font-medium text-center"
+                >
                   Get Started
-                </button>
+                </a>
               </div>
             </div>
           </motion.div>
