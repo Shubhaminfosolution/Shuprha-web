@@ -20,7 +20,7 @@ function App() {
       </main>
       <Footer />
        <div>
-      <Customers />
+      
     </div>
     </div>
   )
