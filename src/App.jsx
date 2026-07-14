@@ -21,7 +21,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
 import Cookies from "./pages/Cookies";
 
-import Businesses from "./pages/Businesses";
+import Businesses from "./pages/businesses";
 import BusinessProfile from "./pages/BusinessProfile";
 
 import ScrollToTop from "./components/ScrollToTop";
