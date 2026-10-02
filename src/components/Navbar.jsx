@@ -13,6 +13,7 @@ const navLinks = [
   { name: 'Businesses', path: '/businesses' },
   { name: 'Why Us', path: '/why-us' },
   { name: 'Contact', path: '/contact' },
+  { name: 'Blog', path: '/blog' },
 ]
 
 export default function Navbar() {

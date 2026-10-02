@@ -17,6 +17,10 @@ import Branding from "./pages/Branding";
 import SocialMedia from "./pages/SocialMedia";
 import SEO from "./pages/SEO";
 
+
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
+
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
 import Cookies from "./pages/Cookies";
@@ -115,6 +119,10 @@ function App() {
               path="/business/:id"
               element={<BusinessProfile />}
             />
+
+
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
 
             {/* POLICIES */}
             <Route
