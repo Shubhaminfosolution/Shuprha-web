@@ -128,9 +128,10 @@ export default function Contact() {
                   </p>
 
                   <p className="font-medium text-lg">
-                    shuprha1327@gmail.com
+                    shuprha.infra@gmail.com
                   </p>
                 </div>
+                
 
               </div>
 
